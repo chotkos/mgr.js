@@ -69,7 +69,7 @@ var interpolate = {
 		return o;
 	},
 	getMapObjectoldValueOnResource:function(mo){
-		var text = mo.params[mo.params.lenght-1];
+		var text = mo.params[mo.params.length-1];
 		return eval("mo.scopeOwner."+text);
 	},
 
