@@ -8,7 +8,7 @@ var interpolate = {
 				this.mappedElements.push(all[i]);
 
 				var interpKeys = eval(all[i].getAttribute("mgr"));
-				//<div mgr="['css color scope.red', 'text scope.name']"></div>
+				//<div mgr="['css color scope.color', 'text scope.name']"></div>
 				//element should also has scope property
 				for(var l=0;l<interpKeys.length;l++){
 					var interpKey = interpKeys[l];
@@ -21,10 +21,12 @@ var interpolate = {
 						interpKey:interpKey,
 						method : method,
 						params : params,
-						oldValue : null,					
+						oldValueOnElement : null,		
+						oldValueOnResource : null,
 					};						
 					
-					o.oldValue = this.getMapObjectValue(o);
+					o.oldValueOnElement = this.getMapObjectoldValueOnElement(o);
+					o.oldValueOnResource = this.getMapObjectoldValueOnResource(o);
 					
 					this.mapObjects.push(o);
 				}
@@ -37,10 +39,17 @@ var interpolate = {
 		//foreach all mapObjects
 		for(var k=0;k<this.mapObjects.length;k++){
 			//if oldvalue another than current -> run modifications on objects.
+			//element->scope
 			var c = this.mapObjects[k];
-			var oldVal = c.oldValue;
-			var newVal = this.getMapObjectValue(c);
-			if(oldVal!=newVal){
+			var oldValueOnElement = c.oldValueOnElement;
+			var newValueOnElement = this.getMapObjectoldValueOnElement(c);
+			if(oldValueOnElement!=newValueOnElement){
+				//make magic here
+			}
+			//scope->element
+			var oldValueOnResource = c.oldValueOnResource;
+			var newValueOnResource = this.getMapObjectoldValueOnResource(c);
+			if(oldValueOnResource!=newValueOnResource){
 				//make magic here
 			}
 		}
@@ -49,7 +58,7 @@ var interpolate = {
 	timerRun:function(){
 		setInterval(this.timerFunction(), 500);
 	},
-	getMapObjectValue(mo) { 
+	getMapObjectoldValueOnElement:function(mo) { 
 		var o = null;
 		if (params > 0) {
 			o = mo[method](params[0]);
@@ -57,6 +66,10 @@ var interpolate = {
 			o = mo[method]();
 		}
 		return o;
-	}
+	},
+	getMapObjectoldValueOnResource:function(mo){
+		var text = mo.params(mo.params.lenght-1);
+		return eval("mo.element."+text);
+	},
 
 };
