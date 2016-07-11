@@ -25,11 +25,30 @@ var interpolate = {
 						oldValueOnElement : null,		
 						oldValueOnResource : null,
 						scopeOwner : element,
+						mapFromResource : function(){
+							var p1 = eval("scopeOwner."+params[0]);
+							var p2 = eval("scopeOwner."+params[1]);
+							eval("this.element[this.method](p1,p2)");
+						},
+						mapFromElement: function(){
+							var field = null;
+							var value = null;
+							if(params.length>1)
+							{
+								field = "this.scopeOwner" + this.params[1];
+								value = "this.element[this.method](this.params[0])";
+							}else{
+								field = "this.scopeOwner" + this.params[0];
+								value = "this.element[this.method]()";
+							}
+							
+							eval(field+"="+value);
+						},
 					};						
-					
+					o.mapFromResource();
+
 					o.oldValueOnElement = this.getMapObjectoldValueOnElement(o);
 					o.oldValueOnResource = this.getMapObjectoldValueOnResource(o);
-					
 					this.mapObjects.push(o);
 				}
 			
