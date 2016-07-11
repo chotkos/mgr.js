@@ -24,7 +24,7 @@ var interpolate = {
 						oldValue : null,					
 					};						
 					
-					o.oldValue = this.getMapObjectValue(all[i]);
+					o.oldValue = this.getMapObjectValue(o);
 					
 					this.mapObjects.push(o);
 				}
@@ -35,8 +35,16 @@ var interpolate = {
 	},
 	timerFunction: function(){
 		//foreach all mapObjects
+		for(var k=0;k<this.mapObjects.length;k++){
+			//if oldvalue another than current -> run modifications on objects.
+			var c = this.mapObjects[k];
+			var oldVal = c.oldValue;
+			var newVal = this.getMapObjectValue(c);
+			if(oldVal!=newVal){
+				//make magic here
+			}
+		}
 		
-		//if oldvalue another than current -> run modifications on objects.
 	},
 	timerRun:function(){
 		setInterval(this.timerFunction(), 500);
