@@ -23,6 +23,7 @@ var interpolate = {
 						params : params,
 						oldValueOnElement : null,		
 						oldValueOnResource : null,
+						scopeOwner : element,
 					};						
 					
 					o.oldValueOnElement = this.getMapObjectoldValueOnElement(o);
@@ -69,7 +70,7 @@ var interpolate = {
 	},
 	getMapObjectoldValueOnResource:function(mo){
 		var text = mo.params[mo.params.lenght-1];
-		return eval("mo.element."+text);
+		return eval("mo.scopeOwner."+text);
 	},
 
 };
