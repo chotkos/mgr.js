@@ -61,9 +61,9 @@ var interpolate = {
 	getMapObjectoldValueOnElement:function(mo) { 
 		var o = null;
 		if (mo.params.length > 0) {
-			o = mo.element[mo.method](mo.params[0]);
+			o = $(mo.element)[mo.method](mo.params[0]);
 		} else { 
-			o = mo.element[mo.method]();
+			o = $(mo.element)[mo.method]();
 		}
 		return o;
 	},
