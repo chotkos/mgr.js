@@ -8,6 +8,7 @@ var interpolate = {
 				this.mappedElements.push(all[i]);
 
 				var interpKeys = eval(all[i].getAttribute("mgr"));
+				//jQuery required
 				//<div mgr="['css color scope.color', 'text scope.name']"></div>
 				//element should also has scope property
 				for(var l=0;l<interpKeys.length;l++){
