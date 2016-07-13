@@ -13,10 +13,14 @@
 		<p>It's only example for interpolation.To check if it works run commands from console:
 		<p>$('#mgrapp')[0].scope.name = "Thomas"
 		<p>$('#mgrapp')[0].scope.color = "blue"
+		<p>$('#mgrapp')[0].scope.text = "another text"
+		<p> To check if changes are made to scope:
+		<p>$('#mgrapp')[0].scope
 	
         <div mgr="['css color scope.color', 'text scope.name']">
             Color and text example.
         </div>
+		<input id="textInput" mgr="['val scope.text']"></input>
     </div>
     <script type="text/javascript">
         $(document).ready(
@@ -26,6 +30,7 @@
                 $('#mgrapp')[0].scope = {
                     color: 'red',
                     name: 'adam',
+					text: 'example text',
                 };
                 interpolate.render($('#mgrapp')[0]);
             }
