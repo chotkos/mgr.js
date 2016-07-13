@@ -27,8 +27,8 @@ var interpolate = {
                         mapFromResource: function () {
                             //jesli wartosc nie jest ze scope tylko np jest nazwa property to inaczej konstruuj eval
                             //if indexof scope. == -1 to wtedy zostaw jako string
-                            var p1 = eval("this.scopeOwner." + params[0]);
-                            var p2 = eval("this.scopeOwner." + params[1]);
+                            var p1 = eval(params[0].replace('scope.','this.scopeOwner.scope'));
+                            var p2 = eval(params[1].replace('scope.','this.scopeOwner.scope'));
                             eval("$(this.element)[this.method](p1,p2)");
                         },
                         mapFromElement: function () {
