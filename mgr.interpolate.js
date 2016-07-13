@@ -27,8 +27,11 @@ var interpolate = {
                         mapFromResource: function () {
                             //jesli wartosc nie jest ze scope tylko np jest nazwa property to inaczej konstruuj eval
                             //if indexof scope. == -1 to wtedy zostaw jako string
-                            var p1 = eval(params[0].replace('scope.','this.scopeOwner.scope'));
-                            var p2 = eval(params[1].replace('scope.','this.scopeOwner.scope'));
+                            var p1 = params[0] ? params[0].replace('scope.','this.scopeOwner.scope.') :'';
+                            var p2 = params[1] ? params[1].replace('scope.','this.scopeOwner.scope.') : '';
+							if(p1.indexOf('scope')!=-1){ p1 = eval(p1);}
+							if(p2.indexOf('scope')!=-1){ p2 = eval(p2);}
+							
                             eval("$(this.element)[this.method](p1,p2)");
                         },
                         mapFromElement: function () {
@@ -77,7 +80,7 @@ var interpolate = {
     },
     getMapObjectoldValueOnElement: function (mo) {
         var o = null;
-        if (mo.params.length > 0) {
+        if (mo.params.length > 1) {
             o = $(mo.element)[mo.method](mo.params[0]);
         } else {
             o = $(mo.element)[mo.method]();
