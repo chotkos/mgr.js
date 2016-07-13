@@ -24,9 +24,7 @@ var interpolate = {
                         oldValueOnElement: null,
                         oldValueOnResource: null,
                         scopeOwner: element,
-                        mapFromResource: function () {
-                            //jesli wartosc nie jest ze scope tylko np jest nazwa property to inaczej konstruuj eval
-                            //if indexof scope. == -1 to wtedy zostaw jako string
+                        mapFromResource: function () { 
                             var p1 = params[0] ? params[0].replace('scope.','this.scopeOwner.scope.') :'';
                             var p2 = params[1] ? params[1].replace('scope.','this.scopeOwner.scope.') : '';
 							if(p1.indexOf('scope')!=-1){ p1 = eval(p1);}
