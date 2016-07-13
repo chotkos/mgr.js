@@ -24,18 +24,18 @@ var interpolate = {
                         oldValueOnElement: null,
                         oldValueOnResource: null,
                         scopeOwner: element,
-                        mapFromResource: function (context) { 
-                            var p1 = params[0] ? params[0].replace('scope.','this.scopeOwner.scope.') :'';
-                            var p2 = params[1] ? params[1].replace('scope.','this.scopeOwner.scope.') : '';
+                        mapFromResource: function () { 
+                            var p1 = this.params[0] ? this.params[0].replace('scope.','this.scopeOwner.scope.') :'';
+                            var p2 = this.params[1] ? this.params[1].replace('scope.','this.scopeOwner.scope.') : '';
 							if(p1.indexOf('scope')!=-1){ p1 = eval(p1);}
 							if(p2.indexOf('scope')!=-1){ p2 = eval(p2);}
 							
                             eval("$(this.element)[this.method](p1,p2)");
                         },
-                        mapFromElement: function (context) {
+                        mapFromElement: function () {
                             var field = null;
                             var value = null;
-                            if (params.length > 1) {
+                            if (this.params.length > 1) {
                                 field = "this.scopeOwner." + this.params[1];
                                 value = "$(this.element)[this.method](this.params[0])";
                             } else {
@@ -76,6 +76,7 @@ var interpolate = {
                 //make magic here
 				c.mapFromResource(context);
 				c.oldValueOnResource = context.getMapObjectoldValueOnResource(c);
+				c.oldValueOnElement = oldValueOnResource;
             }
         }
     },
