@@ -18,12 +18,12 @@
         $(document).ready(
 
             function () {
-                var main = $('#mgrapp');
-                main.scope = {
+                
+                $('#mgrapp')[0].scope = {
                     color: 'red',
                     name: 'adam',
                 };
-                interpolate.render(main);
+                interpolate.render($('#mgrapp')[0]);
             }
         );
     </script>
