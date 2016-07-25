@@ -2,7 +2,7 @@ var interpolate = {
     mappedElements: [],
     mapObjects: [],
     render: function (element) {
-        var all = document.getElementsByTagName("*");
+        var all = element.get()[0].getElementsByTagName("*");
         for (var i = 0; i < all.length; i++) {
             if (all[i].attributes["mgr"]) {
                 this.mappedElements.push(all[i]);
