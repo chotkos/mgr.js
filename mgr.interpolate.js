@@ -4,7 +4,7 @@ var interpolate = {
     mapObjects: [],
     directiveObjects: [],
     render: function (element) {
-        var all = element.get()[0].getElementsByTagName("*");
+        var all = element.getElementsByTagName("*");
         for (var i = 0; i < all.length; i++) {
             //<div mgr="['css color scope.color', 'text scope.name']"></div>
             //element should also has scope property
