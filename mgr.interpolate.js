@@ -1,15 +1,16 @@
+//jQuery required
 var interpolate = {
     mappedElements: [],
     mapObjects: [],
+    directiveObjects: [],
     render: function (element) {
         var all = element.get()[0].getElementsByTagName("*");
         for (var i = 0; i < all.length; i++) {
+            //<div mgr="['css color scope.color', 'text scope.name']"></div>
+            //element should also has scope property
             if (all[i].attributes["mgr"]) {
                 this.mappedElements.push(all[i]);
                 var interpKeys = eval(all[i].getAttribute("mgr"));
-                //jQuery required
-                //<div mgr="['css color scope.color', 'text scope.name']"></div>
-                //element should also has scope property
                 for (var l = 0; l < interpKeys.length; l++) {
                     var interpKey = interpKeys[l];
                     var splitArray = interpKey.split(' ');
@@ -51,6 +52,14 @@ var interpolate = {
                     this.mapObjects.push(o);
                 }
                 console.log(all[i]);
+            }
+            //<div mgr-dir="mydir scopefieldname">
+            if (all[i].attributes["mgr-dir"]){
+            	//split data from attribute
+            	//find directive definition
+            	//render all[i] as the directive 
+            	//connect scopes by scopefieldname
+            	//push to directiveobjects
             }
         }
 		this.timerRun();
