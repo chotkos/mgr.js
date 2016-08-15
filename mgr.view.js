@@ -5,7 +5,7 @@ function View(name, init, template) {
     init = init;
     render = function () {
         init();
-        //interpolate
+        //interpolate()
     };
     this.getTemplateContent = function () {
         $.get("ajax/" + this.name, function (data) {

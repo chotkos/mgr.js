@@ -10,27 +10,40 @@
 
 <body>
     <div id="mgrapp">
-		<p>It's only example for interpolation.To check if it works run commands from console:
-		<p>$('#mgrapp')[0].scope.name = "Thomas"
-		<p>$('#mgrapp')[0].scope.color = "blue"
-		<p>$('#mgrapp')[0].scope.text = "another text"
-		<p> To check if changes are made to scope:
-		<p>$('#mgrapp')[0].scope
-	
+        <p>It's only example for interpolation.To check if it works run commands from console:</p>
+        <p>$('#mgrapp')[0].scope.name = "Thomas"</p>
+        <p>$('#mgrapp')[0].scope.color = "blue"</p>
+        <p>$('#mgrapp')[0].scope.text = "another text"</p>
+        <p> To check if changes are made to scope:</p>
+        <p>$('#mgrapp')[0].scope</p>
+
         <div mgr="['css color scope.color', 'text scope.name']">
             Color and text example.
         </div>
-		<input id="textInput" mgr="['val scope.text']"></input>
+        <input id="textInput" mgr="['val scope.text']"></input>
+        <div class="repeat-container">
+            <div mgr-repeat="item in scope.items">
+                <p>label:</p>
+                <p mgr="['html item.name']"></p>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(
 
             function () {
-                
+
                 $('#mgrapp')[0].scope = {
                     color: 'red',
                     name: 'adam',
-					text: 'example text',
+                    text: 'example text',
+                    items: [{
+                        name: 'item1'
+                    }, {
+                        name: 'item2'
+                    }, {
+                        name: 'item3'
+                    }],
                 };
                 interpolate.render($('#mgrapp')[0]);
             }
