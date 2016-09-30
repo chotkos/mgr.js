@@ -37,9 +37,7 @@ var interpolate = {
                     //eval("e." + alias + " = collectionData[k]");
                     $(parent).append(e);
                     console.log(parent);
-                    //this.render(e);
-                    debugger;
-                    all.push(e); // trzeba wrzucic kazdy childnode element.getElementsByTagName("*");
+                    all.push.apply(all, e.getElementsByTagName("*"));
                 }
                 all[i].remove();
             } else
