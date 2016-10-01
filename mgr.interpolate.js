@@ -1,3 +1,4 @@
+"use strict";
 //jQuery required
 var interpolate = {
     mappedElements: [],
@@ -10,9 +11,7 @@ var interpolate = {
         for (var i in all) arr[i] = all[i];
         all = arr;
         for (var i = 0; i < all.length; i++) {
-
             //<div mgr-repeat="item in scope.items">
-            //<p mgr="['html item.name']"></p></div>
             if (all[i].attributes["mgr-repeat"]) {
                 this.repeatElements.push(all[i]);
                 var interpValues = all[i].getAttribute("mgr-repeat").split(" ");
@@ -20,29 +19,22 @@ var interpolate = {
                 var collectionName = interpValues[2];
                 var collectionData = eval(collectionName.replace('scope', 'element.scope'));
                 var template = all[i];
-
                 template.removeAttribute("mgr-repeat");
                 var tplHtml = $(all[i]).html();
                 var parent = all[i].parentNode;
                 parent.innerHTML = "";
                 template.remove();
-
-
                 for (var k = 0; k < collectionData.length; k++) {
                     var e = document.createElement("div");
-                    //$(e).html($(template).html());
                     $(e).html(tplHtml);
                     e.scope = collectionData[k];
                     $(e).html($(e).html().replace(alias, collectionName + '[' + k + ']'));
-                    //eval("e." + alias + " = collectionData[k]");
                     $(parent).append(e);
-                    console.log(parent);
                     all.push.apply(all, e.getElementsByTagName("*"));
                 }
                 all[i].remove();
             } else
             //<div mgr="['css color scope.color', 'text scope.name']"></div>
-            //element should also has scope property
             if (all[i].attributes["mgr"]) {
                 if (jQuery.contains(document, all[i])) {
                     this.mappedElements.push(all[i]);
@@ -106,10 +98,7 @@ var interpolate = {
         this.timerRun();
     },
     timerFunction: function (context) {
-        //this = context;
-        //foreach all mapObjects
         for (var k = 0; k < context.mapObjects.length; k++) {
-            //if oldvalue another than current -> run modifications on objects.
             //element->scope
             var c = context.mapObjects[k];
             var oldValueOnElement = c.oldValueOnElement;
