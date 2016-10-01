@@ -31,7 +31,7 @@ var interpolate = {
             template.hidden = true;
 
             for (var k = 0; k < collectionData.length; k++) {
-                var e = document.createElement("div");
+                var e = document.createElement(template.tagName);
                 $(e).html(tplHtml);
                 e.scope = collectionData[k];
                 $(e).html($(e).html().replace(alias, collectionName + '[' + k + ']'));
@@ -155,7 +155,7 @@ var interpolate = {
                 template.hidden = true;
                 tplHtml = tplHtml.replace(/istemplate="true"/g, '');
                 for (var k = 0; k < collectionData.length; k++) {
-                    var e = document.createElement("div");
+                    var e = document.createElement(template.tagName);
                     $(e).html(tplHtml);
                     e.scope = collectionData[k];
                     $(e).html($(e).html().replace(alias, collectionName + '[' + k + ']'));

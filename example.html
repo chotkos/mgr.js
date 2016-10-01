@@ -21,16 +21,14 @@
         <div mgr="['css color scope.color', 'text scope.name']">
             Color and text example.
         </div>
-        <input id="textInput" mgr="['val scope.text']"></input>
+        <input id="textInput" mgr="['val scope.text']" />
         <p>mgr-repeat: $('#mgrapp')[0].scope.items = [{name:'first'},{name:'second'}]</p>
         <ul class="repeat-container">
-            <div mgr-repeat="item in scope.items">
-                <li>
-                    <p>label:
-                        <span mgr="['html item.name']"></span>
-                    </p>
-                </li>
-            </div>
+            <li mgr-repeat="item in scope.items">
+                <p>label:
+                    <span mgr="['html item.name']"></span>
+                </p>
+            </li>
         </ul>
     </div>
     <script type="text/javascript">
