@@ -22,12 +22,16 @@
             Color and text example.
         </div>
         <input id="textInput" mgr="['val scope.text']"></input>
-        <div class="repeat-container">
+        <p>mgr-repeat: $('#mgrapp')[0].scope.items = [{name:'first'},{name:'second'}]</p>
+        <ul class="repeat-container">
             <div mgr-repeat="item in scope.items">
-                <p>label:</p>
-                <p mgr="['html item.name']"></p>
+                <li>
+                    <p>label:
+                        <span mgr="['html item.name']"></span>
+                    </p>
+                </li>
             </div>
-        </div>
+        </ul>
     </div>
     <script type="text/javascript">
         $(document).ready(
