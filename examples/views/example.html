@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Example of usage.</title>
+    <script src="../../jquery-3.0.0.min.js"></script>
+    <script src="../../mgr.extends.js"></script>
+    <script src="../../mgr.interpolate.js"></script>
+    <script src="../../mgr.view.js"></script>
+</head>
+<body>
+<div id="mgrapp">
+    <p>It's only example for views engine.</p>
+</div>
+<script>
+    var v1 = new View("first", function () {
+        console.log('view1')
+    }, "first.html");
+    var v2 = new View("second", function () {
+        console.log('view2')
+    }, "second.html");
+
+    //this one is not implemented in purpose
+    /*var v3 = new View("third", function () {
+        console.log('view3')
+    }, "third.html");*/
+
+
+
+</script>
+</body>
+
+</html>

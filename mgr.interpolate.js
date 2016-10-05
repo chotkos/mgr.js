@@ -1,7 +1,6 @@
 "use strict";
 //jQuery required
 var interpolate = {
-
     mappedElements: [],
     mapObjects: [],
     directiveObjects: [],
@@ -107,12 +106,16 @@ var interpolate = {
         } else
         //<div mgr-dir="mydir scopefieldname">
         if (all[i].attributes["mgr-dir"]) {
-            //split data from attribute
-            //find directive definition
-            //render all[i] as the directive
-            //connect scopes by scopefieldname
-            //push to directiveobjects
+            context.renderDirective(all[i],this);
         }
+    },
+    renderDirective : function(directiveElement,context){
+        //split data from attribute
+
+        //find directive definition
+        //render all[i] as the directive
+        //connect scopes by scopefieldname
+        //push to directiveobjects
     },
     render: function (element) {
         var all = element.getElementsByTagName("*");
@@ -166,13 +169,9 @@ var interpolate = {
                         context.renderElement(all[ww], ro.renderElement);
                     }
                 }
-
                 ro.data = newValues;
-
             }
         }
-
-
         var newMO = [];
         for (var ki = 0; ki < context.mapObjects.length; ki++) {
             if (document.contains(context.mapObjects[ki].element)) {
