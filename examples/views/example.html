@@ -6,28 +6,30 @@
     <title>Example of usage.</title>
     <script src="../../jquery-3.0.0.min.js"></script>
     <script src="../../mgr.extends.js"></script>
+    <script src="../../mgr.dictionaries.js"></script>
     <script src="../../mgr.interpolate.js"></script>
     <script src="../../mgr.view.js"></script>
 </head>
 <body>
+<h1>It's only example for views engine.</h1>
+<h5>viewManager.renderView('first');</h5>
+<h5>viewManager.renderView('second');</h5>
 <div id="mgrapp">
-    <p>It's only example for views engine.</p>
 </div>
 <script>
-    var v1 = new View("first", function () {
-        console.log('view1')
+    var v1 = new View("first", function (scope) {
+        console.log('view1');
+        scope.viewName = "view1";
     }, "first.html");
-    var v2 = new View("second", function () {
-        console.log('view2')
+    var v2 = new View("second", function (scope) {
+        console.log('view2');
+        scope.viewName = "view2";
     }, "second.html");
 
     //this one is not implemented in purpose
     /*var v3 = new View("third", function () {
-        console.log('view3')
-    }, "third.html");*/
-
-
-
+     console.log('view3')
+     }, "third.html");*/
 </script>
 </body>
 
