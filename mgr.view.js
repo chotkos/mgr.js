@@ -5,6 +5,7 @@ var viewManager = {
     lastViewName: null,
     activeScope: null,
     container: {},
+    mainUrl: window.location.href ,
     renderView: function (name) {
         this.lastViewName = this.activeViewName;
         if (this.container[name]) {
@@ -37,6 +38,7 @@ function View(name, init, template) {
         init(scope);
         var res = mainElement[0];
         res.scope = mainElement.scope;
+        window.location.href = viewManager.mainUrl+'#'+this.name;
         interpolate.render(res);
     };
     this.getTemplateContent = function (templatename, viewname, context) {
