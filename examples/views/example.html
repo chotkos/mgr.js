@@ -16,15 +16,15 @@
 <h5>viewManager.renderView('second');</h5>
 <div id="mgrapp">
 </div>
-<script>
+<script type="text/javascript">
     var v1 = new View("first", function (scope) {
         console.log('view1');
         scope.viewName = "first";
-    }, "first.html");
+    }, "first.html", true);
     var v2 = new View("second", function (scope) {
         console.log('view2');
         scope.viewName = "second";
-    }, "second.html");
+    }, "second.html",false);
 
     //this one is not implemented in purpose
     /*var v3 = new View("third", function () {
