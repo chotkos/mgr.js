@@ -14,6 +14,8 @@
 <h1>It's only example for views engine.</h1>
 <h5>viewManager.renderView('first');</h5>
 <h5>viewManager.renderView('second');</h5>
+<h5>viewManager.renderView('second',false,{a:123});
+</h5>
 <div id="mgrapp">
 </div>
 <script type="text/javascript">
@@ -21,15 +23,21 @@
         console.log('view1');
         scope.viewName = "first";
     }, "first.html", true);
-    var v2 = new View("second", function (scope) {
+    var v2 = new View("second", function (scope, urlParams) {
         console.log('view2');
+        console.log('urlParams:');
+        console.log(urlParams);
         scope.viewName = "second";
+
     }, "second.html",false);
 
     //this one is not implemented in purpose
     /*var v3 = new View("third", function () {
      console.log('view3')
      }, "third.html");*/
+
+    mgrStart();
+
 </script>
 </body>
 

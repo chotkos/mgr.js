@@ -7,7 +7,7 @@ var viewManager = {
     activeScope: null,
     container: {},
     mainUrl: window.location.href,
-    renderView: function (name, keepUrl) {
+    renderView: function (name, keepUrl, paramsObject) {
         this.lastViewName = this.activeViewName;
         if (this.container[name]) {
             this.activeView = this.container[name];
@@ -16,7 +16,7 @@ var viewManager = {
             mainElement.scope = {};
             this.activeScope = mainElement.scope;
             this.activeViewName = this.activeView.name;
-            this.activeView.render(mainElement, mainElement.scope, keepUrl);
+            this.activeView.render(mainElement, mainElement.scope, keepUrl, paramsObject);
         } else {
             throw dictionaries.errors["viewLoadFail"](name);
         }
@@ -44,12 +44,17 @@ function View(name, init, template, isIndex) {
     this.template = template;
     this.isIndex = isIndex;
     this.init = init;
-    this.render = function (mainElement, scope, keepUrl) {
-        init(scope);
+    this.render = function (mainElement, scope, keepUrl, paramsObject) {
+        init(scope, paramsObject);
         var res = mainElement[0];
         res.scope = mainElement.scope;
         if (!keepUrl) {
-            window.location.href = viewManager.mainUrl + '#' + this.name;
+            var href = viewManager.mainUrl + '#' + this.name;
+
+            if (paramsObject != null && paramsObject != undefined) {
+                href += '?' + $.param(paramsObject);
+            }
+            window.location.href = href;
         }
         interpolate.render(res);
     };
@@ -69,17 +74,25 @@ View.prototype.getName = function () {
     return this.name;
 };
 
-$(document).ready(function () {
+var mgrStart = function () {
     console.log("mgr.js - let's graduate!");
     viewManager.getMainUrl();
+    var urlParams = null;
     if (window.location.href.lastIndexOf('#') != -1) {
         var viewName = window.location.href.split('#');
         viewName = viewName[viewName.length - 1];
-        if (viewManager.container[viewName] != undefined) {
-            viewManager.renderView(viewName, true);
+
+        if (viewName.indexOf('?') != -1) {
+            var vs = viewName.split('?');
+            viewName = vs[0];
+
+            urlParams = jQuery.queryStringToHash(vs[1]);
         }
-    } else
-    if (viewManager.indexViewName != null) {
-        viewManager.renderView(viewManager.indexViewName, false);
+
+        if (viewManager.container[viewName] != undefined) {
+            viewManager.renderView(viewName, true, urlParams);
+        }
+    } else if (viewManager.indexViewName != null) {
+        viewManager.renderView(viewManager.indexViewName, false, urlParams);
     }
-});
+};
