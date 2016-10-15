@@ -16,7 +16,7 @@ var interpolate = {
             var interpValues = all[i].getAttribute("mgr-repeat").split(" ");
             var alias = interpValues[0];
             var collectionName = interpValues[2];
-            var collectionData = eval(collectionName.replace('scope', 'element.scope'));
+            var collectionData = eval(collectionName.replaceAll('scope', 'element.scope'));
             var template = all[i];
             var tplHtml = $(all[i]).html();
             var parent = all[i].parentNode;
@@ -33,7 +33,7 @@ var interpolate = {
                 var e = document.createElement(template.tagName);
                 $(e).html(tplHtml);
                 e.scope = collectionData[k];
-                $(e).html($(e).html().replace(alias, collectionName + '[' + k + ']'));
+                $(e).html($(e).html().replaceAll(alias, collectionName + '[' + k + ']'));
                 $(parent).append(e);
                 var all = [];
                 all.push.apply(all, e.getElementsByTagName("*"));
@@ -46,7 +46,7 @@ var interpolate = {
                 element: obj,
                 data: collectionData,
                 renderElement: element,
-                collectionName: collectionName.replace('scope', 'element.scope'),
+                collectionName: collectionName.replaceAll('scope', 'element.scope'),
             });
 
         } else
@@ -70,8 +70,8 @@ var interpolate = {
                         oldValueOnResource: null,
                         scopeOwner: element,
                         mapFromResource: function () {
-                            var p1 = this.params[0] ? this.params[0].replace('scope.', 'this.scopeOwner.scope.') : '';
-                            var p2 = this.params[1] ? this.params[1].replace('scope.', 'this.scopeOwner.scope.') : '';
+                            var p1 = this.params[0] ? this.params[0].replaceAll('scope.', 'this.scopeOwner.scope.') : '';
+                            var p2 = this.params[1] ? this.params[1].replaceAll('scope.', 'this.scopeOwner.scope.') : '';
                             if (p1.indexOf('scope') != -1) {
                                 p1 = eval(p1);
                             }
@@ -144,7 +144,7 @@ var interpolate = {
                 var interpValues = ro.element.getAttribute("mgr-repeat").split(" ");
                 var alias = interpValues[0];
                 var collectionName = interpValues[2];
-                var collectionData = eval(collectionName.replace('scope', 'element.scope'));
+                var collectionData = eval(collectionName.replaceAll('scope', 'element.scope'));
                 var template = ro.element;
                 var tplHtml = $(ro.element).html();
                 var parent = ro.element.parentNode;
@@ -156,12 +156,12 @@ var interpolate = {
                 };
 
                 template.hidden = true;
-                tplHtml = tplHtml.replace(/istemplate="true"/g, '');
+                tplHtml = tplHtml.replaceAll(/istemplate="true"/g, '');
                 for (var k = 0; k < collectionData.length; k++) {
                     var e = document.createElement(template.tagName);
                     $(e).html(tplHtml);
                     e.scope = collectionData[k];
-                    $(e).html($(e).html().replace(alias, collectionName + '[' + k + ']'));
+                    $(e).html($(e).html().replaceAll(alias, collectionName + '[' + k + ']'));
                     $(parent).append(e);
                     var all = [];
                     all.push.apply(all, e.getElementsByTagName("*"));
