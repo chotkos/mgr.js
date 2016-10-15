@@ -6,6 +6,7 @@ var viewManager = {
     lastViewName: null,
     activeScope: null,
     container: {},
+    indexPromises: [],
     getPromises: [],
     mainUrl: window.location.href,
     renderView: function (name, keepUrl, paramsObject) {
@@ -68,8 +69,10 @@ function View(name, init, template, isIndex) {
                 viewManager.indexViewName = name;
             }
         });
-
+        get.viewName = viewname;
         viewManager.getPromises.push(get);
+        if (isIndex)
+            viewManager.indexPromises.push(get);
     };
     this.element = this.getTemplateContent(this.template, this.name, this);
 }
@@ -80,27 +83,50 @@ View.prototype.getName = function () {
 
 var mgrStart = function () {
 
-    $.when.apply($, viewManager.getPromises).then(function () {
-        console.log("mgr.js - let's graduate!");
-        viewManager.getMainUrl();
-        var urlParams = null;
-        if (window.location.href.lastIndexOf('#') != -1) {
-            var viewName = window.location.href.split('#');
-            viewName = viewName[viewName.length - 1];
+    var load = function () {
 
-            if (viewName.indexOf('?') != -1) {
-                var vs = viewName.split('?');
-                viewName = vs[0];
+        $.when.apply($, viewManager.indexPromises).then(function () {
+            console.log("mgr.js - let's graduate!");
+            viewManager.getMainUrl();
+            var urlParams = null;
+            if (window.location.href.lastIndexOf('#') != -1) {
+                var viewName = window.location.href.split('#');
+                viewName = viewName[viewName.length - 1];
 
-                urlParams = jQuery.queryStringToHash(vs[1]);
+                if (viewName.indexOf('?') != -1) {
+                    var vs = viewName.split('?');
+                    viewName = vs[0];
+
+                    urlParams = jQuery.queryStringToHash(vs[1]);
+                }
+
+                if (viewManager.container[viewName] != undefined) {
+                    viewManager.renderView(viewName, true, urlParams);
+                }
+            } else if (viewManager.indexViewName != null) {
+                viewManager.renderView(viewManager.indexViewName, false, urlParams);
             }
 
-            if (viewManager.container[viewName] != undefined) {
-                viewManager.renderView(viewName, true, urlParams);
-            }
-        } else if (viewManager.indexViewName != null) {
-            viewManager.renderView(viewManager.indexViewName, false, urlParams);
+        });
+    };
+
+    if (window.location.href.lastIndexOf('#') != -1) {
+        var viewName = window.location.href.split('#');
+        viewName = viewName[viewName.length - 1];
+
+        if (viewName.indexOf('?') != -1) {
+            var vs = viewName.split('?');
+            viewName = vs[0];
         }
+        for (var i = 0; i < viewManager.getPromises.length; i++) {
+            var e = viewManager.getPromises[i];
+            if (e.viewName === viewName) {
+                viewManager.indexPromises = [e];
+            }
+        }
+        laod();
+    } else load();
 
-    });
+
+
 };
