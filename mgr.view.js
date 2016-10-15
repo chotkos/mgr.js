@@ -124,7 +124,7 @@ var mgrStart = function () {
                 viewManager.indexPromises = [e];
             }
         }
-        laod();
+        load();
     } else load();
 
 
