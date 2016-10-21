@@ -2,19 +2,19 @@ var dataRepository = {
     all: [{
             id: 1,
             name: 'John Doe',
-            imageUrl: 'johndoe.jpg',
+            imageUrl: '_include/img/johndoe.jpg',
             position: 'Founder',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
         }, {
             id: 2,
             name: 'Jane Helf',
-            imageUrl: 'janehelf.jpg',
+            imageUrl: '_include/img/janehelf.jpg',
             position: 'Creative Director',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
         }, {
             id: 3,
             name: 'Joshua Insanus',
-            imageUrl: 'joshuainsanus.jpg',
+            imageUrl: '_include/img/joshuainsanus.jpg',
             position: 'Lead Designer',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'
         }

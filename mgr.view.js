@@ -58,7 +58,7 @@ function View(name, init, template, isIndex) {
             }
             window.location.href = href;
         }
-        interpolate.render(res);
+        interpolate.render(res,this.name);
     };
     this.getTemplateContent = function (templatename, viewname, context) {
         viewManager.container[viewname] = context;

@@ -6,7 +6,7 @@ var interpolate = {
     directiveObjects: [],
     repeatElements: [],
     repeatObjects: [],
-    renderElement: function (obj, mainElement) {
+    renderElement: function (obj, mainElement, viewName) {
         var all = [obj];
         var element = mainElement;
         var i = 0; //TODO REFACTOR
@@ -38,11 +38,12 @@ var interpolate = {
                 var all = [];
                 all.push.apply(all, e.getElementsByTagName("*"));
                 for (var ww = 0; ww < all.length; ww++) {
-                    this.renderElement(all[ww], element);
+                    this.renderElement(all[ww], element, viewName);
                 }
             }
 
             this.repeatObjects.push({
+                viewName: viewName,
                 element: obj,
                 data: collectionData,
                 renderElement: element,
@@ -62,6 +63,7 @@ var interpolate = {
                     splitArray.shift();
                     var params = splitArray;
                     var o = {
+                        viewName: viewName,
                         element: all[i],
                         interpKey: interpKey,
                         method: method,
@@ -106,10 +108,10 @@ var interpolate = {
         } else
         //<div mgr-dir="mydir scopefieldname">
         if (all[i].attributes["mgr-dir"]) {
-            context.renderDirective(all[i],this);
+            context.renderDirective(all[i], this);
         }
     },
-    renderDirective : function(directiveElement,context){
+    renderDirective: function (directiveElement, context) {
         //split data from attribute
 
         //find directive definition
@@ -117,64 +119,66 @@ var interpolate = {
         //connect scopes by scopefieldname
         //push to directiveobjects
     },
-    render: function (element) {
+    render: function (element, viewName) {
         var all = element.getElementsByTagName("*");
         var arr = [];
         for (var i in all) arr[i] = all[i];
         all = arr;
         for (var i = 0; i < all.length; i++) {
-            this.renderElement(all[i], element);
+            this.renderElement(all[i], element, viewName);
         }
         this.timerRun();
     },
     timerFunction: function (context) {
         for (var z = 0; z < context.repeatObjects.length; z++) {
             var ro = context.repeatObjects[z];
+            if (ro.viewName === viewManager.activeViewName) {
+                var element = ro.renderElement;
+                var newValues = eval(ro.collectionName);
 
-            var element = ro.renderElement;
-            var newValues = eval(ro.collectionName);
+                if (!jQuery.compareArrays(ro.data, newValues)) {
+                    var template = $(ro.element).html();
 
-            if (!jQuery.compareArrays(ro.data, newValues)) {
-                var template = $(ro.element).html();
-
-                while (ro.element.parentElement.children[1] != undefined) {
-                    ro.element.parentElement.children[1].remove();
-                }
-
-                var interpValues = ro.element.getAttribute("mgr-repeat").split(" ");
-                var alias = interpValues[0];
-                var collectionName = interpValues[2];
-                var collectionData = eval(collectionName.replaceAll('scope', 'element.scope'));
-                var template = ro.element;
-                var tplHtml = $(ro.element).html();
-                var parent = ro.element.parentNode;
-
-                //mark template elements to not map
-                var toMark = template.getElementsByTagName("*");
-                for (var zi = 0; zi < toMark.length; zi++) {
-                    $(toMark[zi]).attr('isTemplate', 'true');
-                };
-
-                template.hidden = true;
-                tplHtml = tplHtml.replaceAll(/istemplate="true"/g, '');
-                for (var k = 0; k < collectionData.length; k++) {
-                    var e = document.createElement(template.tagName);
-                    $(e).html(tplHtml);
-                    e.scope = collectionData[k];
-                    $(e).html($(e).html().replaceAll(alias, collectionName + '[' + k + ']'));
-                    $(parent).append(e);
-                    var all = [];
-                    all.push.apply(all, e.getElementsByTagName("*"));
-                    for (var ww = 0; ww < all.length; ww++) {
-                        context.renderElement(all[ww], ro.renderElement);
+                    while (ro.element.parentElement.children[1] != undefined) {
+                        ro.element.parentElement.children[1].remove();
                     }
+
+                    var interpValues = ro.element.getAttribute("mgr-repeat").split(" ");
+                    var alias = interpValues[0];
+                    var collectionName = interpValues[2];
+                    var collectionData = eval(collectionName.replaceAll('scope', 'element.scope'));
+                    var template = ro.element;
+                    var tplHtml = $(ro.element).html();
+                    var parent = ro.element.parentNode;
+
+                    //mark template elements to not map
+                    var toMark = template.getElementsByTagName("*");
+                    for (var zi = 0; zi < toMark.length; zi++) {
+                        $(toMark[zi]).attr('isTemplate', 'true');
+                    };
+
+                    template.hidden = true;
+                    tplHtml = tplHtml.replaceAll(/istemplate="true"/g, '');
+                    for (var k = 0; k < collectionData.length; k++) {
+                        var e = document.createElement(template.tagName);
+                        $(e).html(tplHtml);
+                        e.scope = collectionData[k];
+                        $(e).html($(e).html().replaceAll(alias, collectionName + '[' + k + ']'));
+                        $(parent).append(e);
+                        var all = [];
+                        all.push.apply(all, e.getElementsByTagName("*"));
+                        for (var ww = 0; ww < all.length; ww++) {
+                            context.renderElement(all[ww], ro.renderElement, ro.viewName);
+                        }
+                    }
+                    ro.data = newValues;
                 }
-                ro.data = newValues;
             }
         }
         var newMO = [];
         for (var ki = 0; ki < context.mapObjects.length; ki++) {
-            if (document.contains(context.mapObjects[ki].element)) {
+            if (context.mapObjects[ki].viewName == viewManager.activeViewName &&
+             document.contains(context.mapObjects[ki].element)) {
                 newMO.push(context.mapObjects[ki]);
             }
         }
