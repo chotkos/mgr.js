@@ -12,6 +12,12 @@ var userprofile = new View("userprofile", function (scope, routeParams) {
     console.log("userprofile");
     console.log(routeParams);
     scope.user = dataRepository.getById(parseInt(routeParams.id));
-
+    scope.moveBack = function(){
+        if(viewManager.lastViewName != null){
+            viewManager.moveBack();
+        }else{
+            viewManager.renderView('userlist',false);
+        }
+    };
 }, "userprofile.html", false);
 mgrStart();

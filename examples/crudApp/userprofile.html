@@ -6,6 +6,7 @@
             <div class="span12">
                 <div class="title-page">
                     <h2 class="title" mgr="['html scope.user.name']"></h2>
+                    <img mgr="['attr src scope.user.imageUrl']">
                     <h3 class="title-description" mgr="['html scope.user.position']"></h3>
                     <h5 class="title-description" mgr="['html scope.user.description']"></h5>
                 </div>
@@ -17,7 +18,7 @@
         <div class="row">
             <form id="contact-form" class="contact-form" action="#">
                 <p class="contact-submit">
-                    <a id="contact-submit" class="submit" mgr-events="['click viewManager.moveBack()']">Back</a>
+                    <a id="contact-submit" class="submit" mgr-events="['click scope.moveBack()']">Back</a>
                     <a id="contact-submit" class="submit">Edit</a>
                 </p>
             </form>
