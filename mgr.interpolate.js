@@ -10,6 +10,19 @@ var interpolate = {
         var all = [obj];
         var element = mainElement;
         var i = 0; //TODO REFACTOR
+
+        if(all[i].attributes["mgr-events"]){
+            var interpValues = eval(all[i].getAttribute("mgr-events"));
+            for(var z = 0;z<interpValues.length;z++){
+                var split = interpValues[z].split(' ');
+                var ind = interpValues[z].indexOf(' ');
+                var fun = interpValues[z].substring(ind);
+                fun = fun.replaceAll('scope','element.scope');
+                //fun.replaceAll('')
+                $(all[i]).on(split[0], function(){eval(fun);});
+            }
+        }
+
         //<div mgr-repeat="item in scope.items">
         if (all[i].attributes["mgr-repeat"]) {
 
