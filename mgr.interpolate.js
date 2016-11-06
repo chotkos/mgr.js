@@ -11,15 +11,17 @@ var interpolate = {
         var element = mainElement;
         var i = 0; //TODO REFACTOR
 
-        if(all[i].attributes["mgr-events"]){
+        if (all[i].attributes["mgr-events"]) {
             var interpValues = eval(all[i].getAttribute("mgr-events"));
-            for(var z = 0;z<interpValues.length;z++){
+            for (var z = 0; z < interpValues.length; z++) {
                 var split = interpValues[z].split(' ');
                 var ind = interpValues[z].indexOf(' ');
                 var fun = interpValues[z].substring(ind);
-                fun = fun.replaceAll('scope','element.scope');
+                fun = fun.replaceAll('scope', 'element.scope');
                 //fun.replaceAll('')
-                $(all[i]).on(split[0], function(){eval(fun);});
+                $(all[i]).on(split[0], function () {
+                    eval(fun);
+                });
             }
         }
 
@@ -134,6 +136,14 @@ var interpolate = {
     },
     render: function (element, viewName) {
         var all = element.getElementsByTagName("*");
+
+        if (viewName == 'template') {
+            //var allcopy = [];
+            console.log('template rendering');
+            //all = allcopy;
+        }
+
+
         var arr = [];
         for (var i in all) arr[i] = all[i];
         all = arr;
@@ -191,7 +201,7 @@ var interpolate = {
         var newMO = [];
         for (var ki = 0; ki < context.mapObjects.length; ki++) {
             if (context.mapObjects[ki].viewName == viewManager.activeViewName &&
-             document.contains(context.mapObjects[ki].element)) {
+                document.contains(context.mapObjects[ki].element)) {
                 newMO.push(context.mapObjects[ki]);
             }
         }

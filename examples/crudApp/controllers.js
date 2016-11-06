@@ -1,3 +1,10 @@
+var template = new Template(function (scope) {
+    console.log('template scope loaded');
+    scope.moveHome = function () {
+        viewManager.renderView('userlist', false);
+    };
+});
+
 var userlist = new View("userlist", function (scope) {
     console.log("userlist");
     scope.users = dataRepository.getAll();
@@ -10,8 +17,6 @@ var userlist = new View("userlist", function (scope) {
     scope.createNew = function () {
         viewManager.renderView('usercreate', false);
     };
-
-
 }, "userlist.html", true);
 
 var userprofile = new View("userprofile", function (scope, routeParams) {
@@ -29,7 +34,6 @@ var userprofile = new View("userprofile", function (scope, routeParams) {
         scope.moveBack();
     };
 }, "userprofile.html", false);
-mgrStart();
 
 var usercreate = new View("usercreate", function (scope) {
     scope.user = {
@@ -71,3 +75,6 @@ var userupdate = new View("userupdate", function (scope, routeParams) {
         scope.moveBack();
     };
 }, "userupdate.html", false);
+
+
+mgrStart();

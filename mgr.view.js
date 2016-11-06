@@ -110,6 +110,16 @@ function View(name, init, template, isIndex) {
     this.element = this.getTemplateContent(this.template, this.name, this);
 }
 
+function Template(init) {
+    this.init = init;
+    var scope = {};
+    init(scope);
+
+    var doc = $(document.body)[0];
+    doc.scope = scope;
+    interpolate.render(doc, 'template');
+}
+
 View.prototype.getName = function () {
     return this.name;
 };
