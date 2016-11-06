@@ -33,5 +33,12 @@ var dataRepository = {
         var id = parseInt(Math.random() * 100000000);
         model.id = id;
         dataRepository.all.push(model);
+    },
+    update: function (model) {
+        for (var i = 0; i < this.all.length; i++) {
+            if (this.all[i].id === model.id) {
+                this.all[i] = model;
+            }
+        }
     }
 };

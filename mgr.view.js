@@ -4,6 +4,7 @@ var viewManager = {
     activeView: null,
     activeViewName: null,
     lastViewName: null,
+    lastViewParams: null,
     activeScope: null,
     container: {},
     indexPromises: [],
@@ -11,6 +12,7 @@ var viewManager = {
     mainUrl: window.location.href,
     renderView: function (name, keepUrl, paramsObject) {
         this.lastViewName = this.activeViewName;
+        this.lastViewParams = paramsObject;
         if (this.container[name]) {
             this.activeView = this.container[name];
             var mainElement = $('#mgrapp');
@@ -25,7 +27,7 @@ var viewManager = {
     },
     moveBack: function () {
         if (this.lastViewName) {
-            this.renderView(this.lastViewName);
+            this.renderView(this.lastViewName, false, this.lastViewParams);
         } else {
             throw dictionaries.errors["noBackView"]();
         }
@@ -58,7 +60,7 @@ function View(name, init, template, isIndex) {
             }
             window.location.href = href;
         }
-        interpolate.render(res,this.name);
+        interpolate.render(res, this.name);
     };
     this.getTemplateContent = function (templatename, viewname, context) {
         viewManager.container[viewname] = context;

@@ -17,14 +17,13 @@ var userlist = new View("userlist", function (scope) {
 var userprofile = new View("userprofile", function (scope, routeParams) {
     scope.user = dataRepository.getById(parseInt(routeParams.id));
     scope.moveBack = function () {
-        if (viewManager.lastViewName != null) {
-            viewManager.moveBack();
-        } else {
-            viewManager.renderView('userlist', false);
-        }
+        viewManager.renderView('userlist', false);
     };
-
-
+    scope.edit = function () {
+        viewManager.renderView('userupdate', false, {
+            id: scope.user.id
+        });
+    };
 }, "userprofile.html", false);
 mgrStart();
 
@@ -50,3 +49,21 @@ var usercreate = new View("usercreate", function (scope) {
         scope.moveBack();
     };
 }, "usercreate.html", false);
+
+
+var userupdate = new View("userupdate", function (scope, routeParams) {
+    scope.user = dataRepository.getById(routeParams.id);
+
+    scope.moveBack = function () {
+        if (viewManager.lastViewName != null) {
+            viewManager.moveBack();
+        } else {
+            viewManager.renderView('userlist', false);
+        }
+    };
+
+    scope.save = function () {
+        dataRepository.update(scope.user);
+        scope.moveBack();
+    };
+}, "userupdate.html", false);
