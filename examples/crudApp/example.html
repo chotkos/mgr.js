@@ -3,20 +3,23 @@
 <!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if (IE 9)]><html class="no-js ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en-US"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+
 <head>
 
     <!-- Meta Tags -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title>Brushed | Responsive One Page Template</title>
+    <title>mgr.js - CRUD example</title>
 
     <meta name="description" content="Insert Your Site Description" />
 
     <!-- Mobile Specifics -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="MobileOptimized" content="320"/>
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
 
     <!-- Mobile Internet Explorer ClearType Technology -->
     <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
@@ -64,38 +67,57 @@
 
 <body>
 
-<center><h4>mgr.js example app</h1></center>
-<div id="mgrapp"></div>
-<!-- End Homepage Slider -->
+    <!-- Header -->
+    <header>
+        <div class="sticky-nav">
+            <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+
+            <div id="logo">
+                <p id="appname" style='background-image:none;color: #DE5E60;cursor:pointer;' mgr-events="['click scope.moveHome()']">CRUD EXAMPLE - mgr.js</p>
+            </div>
+
+            <nav id="menu">
+                <ul id="menu-nav">
+                    <li class="current"><a mgr-events="['click scope.moveHome()']">Home</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <div id="mgrapp"></div>
+    <!-- End Homepage Slider -->
 
 
-<!-- Footer -->
-<footer>
-    <p class="credits">&copy;2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
-</footer>
-<!-- End Footer -->
+    <!-- Footer -->
+    <footer>
+        <p class="credits">&copy;2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
+    </footer>
+    <!-- End Footer -->
 
-<!-- Back To Top -->
-<a id="back-to-top" href="#">
-    <i class="font-icon-arrow-simple-up"></i>
-</a>
-<!-- End Back to Top -->
-
-
-<!-- Js -->
-<!-- End Js -->
+    <!-- Back To Top -->
+    <a id="back-to-top" href="#">
+        <i class="font-icon-arrow-simple-up"></i>
+    </a>
+    <!-- End Back to Top -->
 
 
-<!--mgr.js-->
-<script src="../../jquery-3.0.0.min.js"></script>
-<script src="../../mgr.extends.js"></script>
-<script src="../../mgr.dictionaries.js"></script>
-<script src="../../mgr.interpolate.js"></script>
-<script src="../../mgr.view.js"></script>
-<script src="fakeData.js"></script>
-<script src="controllers.js"></script>
+    <!-- Js -->
+    <!-- End Js -->
 
-<!--mgr.js-->
+
+    <!--mgr.js-->
+    <script src="../../jquery-3.0.0.min.js"></script>
+    <script src="../../mgr.extends.js"></script>
+    <script src="../../mgr.dictionaries.js"></script>
+    <script src="../../mgr.interpolate.js"></script>
+    <script src="../../mgr.view.js"></script>
+    <script src="fakeData.js"></script>
+    <script src="controllers.js"></script>
+
+    <!--mgr.js-->
 
 </body>
+
 </html>
