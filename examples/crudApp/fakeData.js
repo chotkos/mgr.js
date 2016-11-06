@@ -22,11 +22,16 @@ var dataRepository = {
     getAll: function () {
         return this.all;
     },
-    getById: function(id){        
-        for(var i=0;i<this.all.length;i++){
-            if(this.all[i].id === id){
+    getById: function (id) {
+        for (var i = 0; i < this.all.length; i++) {
+            if (this.all[i].id === id) {
                 return this.all[i];
             }
         }
+    },
+    create: function (model) {
+        var id = parseInt(Math.random() * 100000000);
+        model.id = id;
+        dataRepository.all.push(model);
     }
 };

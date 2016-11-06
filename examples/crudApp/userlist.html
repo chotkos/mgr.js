@@ -22,7 +22,7 @@
                             <span class="overlay-img"></span>
                             <span class="overlay-text-thumb" mgr="['html item.position']"></span>
                         </div>
-                        <img mgr="['attr src item.imageUrl']" >
+                        <img mgr="['attr src item.imageUrl']">
                     </div>
                     <h3 class="profile-name" mgr="['html item.name']"></h3>
                     <p class="profile-description" mgr="['html item.description']"></p>
@@ -38,6 +38,13 @@
                 <!-- End Profile -->
             </div>
 
+        </div>
+        <div class="row">
+            <form id="contact-form" class="contact-form" action="#">
+                <p class="contact-submit">
+                    <a id="contact-submit" class="submit" mgr-events="['click scope.createNew()']">Create new</a>
+                </p>
+            </form>
         </div>
         <!-- End People -->
     </div>

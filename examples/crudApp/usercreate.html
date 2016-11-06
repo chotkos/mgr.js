@@ -1,0 +1,36 @@
+<div id="contact" class="page">
+    <div class="container">
+        <!-- Title Page -->
+        <div class="row">
+            <div class="span12">
+                <div class="title-page">
+                    <h2 class="title">Create new user</h2>
+                </div>
+            </div>
+        </div>
+        <!-- End Title Page -->
+        <div class="row">
+            <div class="span3"></div>
+            <div class="span6">
+                <form id="contact-form" class="contact-form" action="#">
+                    <p class="contact-name">
+                        <input id="contact_name" type="text" placeholder="Full Name" name="name" mgr="['val scope.user.name']" />
+                    </p>
+                    <p class="contact-position">
+                        <input id="contact_position" type="text" placeholder="Position" name="position" mgr="['val scope.user.position']" />
+                    </p>
+                    <p class="contact-photo">
+                        <input id="contact_photo" type="text" placeholder="Photo URL" name="photo" mgr="['val scope.user.imageUrl']" />
+                    </p>
+                    <p class="contact-description">
+                        <textarea id="contact_description" placeholder="Description" name="description" rows="15" cols="40" mgr="['val scope.user.description']"></textarea>
+                    </p>
+                    <p class="contact-submit">
+                        <a id="contact-submit" class="submit" mgr-events="['click scope.moveBack()']">Back</a>
+                        <a id="contact-submit" class="submit pull-right" mgr-events="['click scope.save()']">Save</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
