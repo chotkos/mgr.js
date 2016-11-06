@@ -40,5 +40,17 @@ var dataRepository = {
                 this.all[i] = model;
             }
         }
-    }
+    },
+    remove: function (id) {
+        var index = -1;
+        for (var i = 0; i < this.all.length; i++) {
+            if (this.all[i].id === id) {
+                index = i;
+                break;
+            }
+        }
+        if (index != -1) {
+            this.all.splice(index, 1);
+        }
+    },
 };

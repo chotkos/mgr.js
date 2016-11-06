@@ -24,6 +24,10 @@ var userprofile = new View("userprofile", function (scope, routeParams) {
             id: scope.user.id
         });
     };
+    scope.remove = function () {
+        dataRepository.remove(scope.user.id);
+        scope.moveBack();
+    };
 }, "userprofile.html", false);
 mgrStart();
 
