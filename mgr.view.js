@@ -29,7 +29,7 @@ var viewManager = {
         if (this.lastViewName) {
             this.renderView(this.lastViewName, false, this.lastViewParams);
         } else {
-            throw dictionaries.errors["noBackView"]();
+            console.warn(dictionaries.errors["noBackView"]());
         }
     },
     getMainUrl: function () {
@@ -41,6 +41,37 @@ var viewManager = {
         }
     },
 };
+
+document.onmouseover = function () {
+    window.docClick = true;
+}
+
+document.onmouseleave = function () {
+    window.docClick = false;
+}
+
+window.onhashchange = function () {
+    if (!window.docClick) {
+        viewManager.moveBack();
+    }
+}
+$(function () {
+    /*
+     * this swallows backspace keys on any non-input element.
+     * stops backspace -> back
+     */
+    var rx = /INPUT|SELECT|TEXTAREA/i;
+
+    $(document).bind("keydown keypress", function (e) {
+        if (e.which == 8) { // 8 == backspace
+            if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
+                e.preventDefault();
+                viewManager.moveBack();
+            }
+        }
+    });
+});
+
 
 
 function View(name, init, template, isIndex) {
