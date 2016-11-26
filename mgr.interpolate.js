@@ -114,7 +114,7 @@ var interpolate = {
                     o.oldValueOnElement = this.getMapObjectoldValueOnElement(o);
                     o.oldValueOnResource = this.getMapObjectoldValueOnResource(o);
                     if (this === null) {
-                        context.mapObjects.push(o);
+                        this.mapObjects.push(o);
                     } else {
                         this.mapObjects.push(o);
                     }
@@ -123,16 +123,29 @@ var interpolate = {
         } else
         //<div mgr-dir="mydir scopefieldname">
         if (all[i].attributes["mgr-dir"]) {
-            context.renderDirective(all[i], this);
+            this.renderDirective(all[i], this, mainElement, viewName);
         }
     },
-    renderDirective: function (directiveElement, context) {
+    renderDirective: function (directiveElement, context, mainElement, viewName) {
         //split data from attribute
-
-        //find directive definition
+        var argtable = directiveElement.getAttribute("mgr-dir").split(' ');
+        var directiveName = argtable[0];
+        var directive = directiveManager[directiveName];
         //render all[i] as the directive
         //connect scopes by scopefieldname
         //push to directiveobjects
+        var dirArgs = argtable[1].replaceAll('scope.', 'element.scope.')
+        var dirObject = {
+            directiveDefinition: directive,
+            element: directiveElement,
+            renderElement: mainElement,
+            viewName: viewName,
+            name: directiveName,
+            directiveArgs: dirArgs,
+            parent: directiveElement.parentNode,
+
+        };
+        this.directiveObjects.push(dirObject);
     },
     render: function (element, viewName) {
         var all = element.getElementsByTagName("*");

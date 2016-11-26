@@ -129,27 +129,28 @@ var mgrStart = function () {
     var load = function () {
 
         $.when.apply($, viewManager.indexPromises).then(function () {
-            console.log("mgr.js - let's graduate!");
-            viewManager.getMainUrl();
-            var urlParams = null;
-            if (window.location.href.lastIndexOf('#') != -1) {
-                var viewName = window.location.href.split('#');
-                viewName = viewName[viewName.length - 1];
+            $.when.apply($, directiveManager.getPromises).then(function () {
+                console.log("mgr.js - let's graduate!");
+                viewManager.getMainUrl();
+                var urlParams = null;
+                if (window.location.href.lastIndexOf('#') != -1) {
+                    var viewName = window.location.href.split('#');
+                    viewName = viewName[viewName.length - 1];
 
-                if (viewName.indexOf('?') != -1) {
-                    var vs = viewName.split('?');
-                    viewName = vs[0];
+                    if (viewName.indexOf('?') != -1) {
+                        var vs = viewName.split('?');
+                        viewName = vs[0];
 
-                    urlParams = jQuery.queryStringToHash(vs[1]);
+                        urlParams = jQuery.queryStringToHash(vs[1]);
+                    }
+
+                    if (viewManager.container[viewName] != undefined) {
+                        viewManager.renderView(viewName, true, urlParams);
+                    }
+                } else if (viewManager.indexViewName != null) {
+                    viewManager.renderView(viewManager.indexViewName, false, urlParams);
                 }
-
-                if (viewManager.container[viewName] != undefined) {
-                    viewManager.renderView(viewName, true, urlParams);
-                }
-            } else if (viewManager.indexViewName != null) {
-                viewManager.renderView(viewManager.indexViewName, false, urlParams);
-            }
-
+            });
         });
     };
 
