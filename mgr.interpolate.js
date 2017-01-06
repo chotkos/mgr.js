@@ -128,10 +128,31 @@ var interpolate = {
     },
     renderDirective: function (directiveElement, context, mainElement, viewName) {
         //split data from attribute
-        var argtable = directiveElement.getAttribute("mgr-dir").split(' ');
-        var directiveName = argtable[0];
-        var directive = directiveManager[directiveName];
-        //render all[i] as the directive
+        var atr = directiveElement.getAttribute("mgr-dir");
+        var argtable = atr.split(' ');
+        var directiveName = argtable[0].trim();
+        var directiveScope = atr.substr(directiveName.length, atr.length - 1).trim();
+        argtable = [directiveName, directiveScope];
+
+        var directive = directiveManager.container[directiveName];
+        //render directiveElement as the directive
+        if (argtable.length > 1) {
+            $(directiveElement).html(directive.element.replaceAll('scope', argtable[1]));
+        }
+        var children = $(directiveElement).children();
+        var childrenLength = children.length;
+
+        /*for (var i = 0; i < childrenLength; i++) {
+            interpolate.renderElement(children[i], mainElement, viewName);
+        })*/
+
+
+        var all = directiveElement.getElementsByTagName("*");
+        for (var ww = 0; ww < all.length; ww++) {
+            this.renderElement(all[ww], mainElement, viewName);
+        }
+
+
         //connect scopes by scopefieldname
         //push to directiveobjects
         var dirArgs = argtable[1].replaceAll('scope.', 'element.scope.')
