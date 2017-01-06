@@ -31,7 +31,7 @@ var interpolate = {
             var interpValues = all[i].getAttribute("mgr-repeat").split(" ");
             var alias = interpValues[0];
             var collectionName = interpValues[2];
-            var collectionData = $.extend((true, {}, eval(collectionName.replaceAll('scope', 'element.scope'))));
+            var collectionData = JSON.parse(JSON.stringify(eval(collectionName.replaceAll('scope', 'element.scope'))));
             var template = all[i];
             var tplHtml = $(all[i]).html();
             var parent = all[i].parentNode;
@@ -228,7 +228,7 @@ var interpolate = {
                             context.renderElement(all[ww], ro.renderElement, ro.viewName);
                         }
                     }
-                    ro.data = newValues;
+                    ro.data = JSON.parse(JSON.stringify(newValues));
                 }
             }
         }
