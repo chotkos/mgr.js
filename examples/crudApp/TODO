@@ -1,3 +1,2 @@
-1. Interpolacja dyrektyw live.  - done
-2. Interpolacja repeat live nie działa. - done
-3. Refacto interpolate
+1. Zmiana interpolate na binding - done
+2. Refactor binding

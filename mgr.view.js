@@ -91,7 +91,7 @@ function View(name, init, template, isIndex) {
             }
             window.location.href = href;
         }
-        interpolate.render(res, this.name);
+        binding.render(res, this.name);
     };
     this.getTemplateContent = function (templatename, viewname, context) {
         viewManager.container[viewname] = context;
@@ -117,7 +117,7 @@ function Template(init) {
 
     var doc = $(document.body)[0];
     doc.scope = scope;
-    interpolate.render(doc, 'template');
+    binding.render(doc, 'template');
 }
 
 View.prototype.getName = function () {

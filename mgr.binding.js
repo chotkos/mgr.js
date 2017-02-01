@@ -1,6 +1,6 @@
 "use strict";
 //jQuery required
-var interpolate = {
+var binding = {
     mappedElements: [],
     mapObjects: [],
     directiveObjects: [],
@@ -143,7 +143,7 @@ var interpolate = {
         var childrenLength = children.length;
 
         /*for (var i = 0; i < childrenLength; i++) {
-            interpolate.renderElement(children[i], mainElement, viewName);
+            binding.renderElement(children[i], mainElement, viewName);
         })*/
 
 
