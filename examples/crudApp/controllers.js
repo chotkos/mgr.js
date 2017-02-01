@@ -1,12 +1,10 @@
 var template = new Template(function (scope) {
-    console.log('template scope loaded');
     scope.moveHome = function () {
         viewManager.renderView('userlist', false);
     };
 });
 
 var userlist = new View("userlist", function (scope) {
-    console.log("userlist");
     scope.users = dataRepository.getAll();
     scope.showProfile = function (id) {
         viewManager.renderView('userprofile', false, {

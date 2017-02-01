@@ -39,7 +39,6 @@ var binding = {
         for (var zi = 0; zi < toMark.length; zi++) {
             $(toMark[zi]).attr('isTemplate', 'true');
         }
-        ;
 
         template.hidden = true;
 
@@ -108,8 +107,8 @@ var binding = {
                     },
                 };
                 o.mapFromResource();
-                o.oldValueOnElement = this.getMapObjectoldValueOnElement(o);
-                o.oldValueOnResource = this.getMapObjectoldValueOnResource(o);
+                o.oldValueOnElement = this.getMapObjectOldValueOnElement(o);
+                o.oldValueOnResource = this.getMapObjectOldValueOnResource(o);
                 if (this === null) {
                     this.mapObjects.push(o);
                 } else {
@@ -125,7 +124,7 @@ var binding = {
             var ind = interpValues[z].indexOf(' ');
             var fun = interpValues[z].substring(ind);
             fun = fun.replaceAll('scope', 'element.scope');
-            //fun.replaceAll('')
+
             $(renderedElement).on(split[0], function () {
                 eval(fun);
             });
@@ -144,22 +143,12 @@ var binding = {
         if (argtable.length > 1) {
             $(directiveElement).html(directive.element.replaceAll('scope', argtable[1]));
         }
-        var children = $(directiveElement).children();
-        var childrenLength = children.length;
-
-        /*for (var i = 0; i < childrenLength; i++) {
-            binding.renderElement(children[i], mainElement, viewName);
-        })*/
-
 
         var all = directiveElement.getElementsByTagName("*");
         for (var ww = 0; ww < all.length; ww++) {
             this.renderElement(all[ww], mainElement, viewName);
         }
 
-
-        //connect scopes by scopefieldname
-        //push to directiveobjects
         var dirArgs = argtable[1].replaceAll('scope.', 'element.scope.')
         var dirObject = {
             directiveDefinition: directive,
@@ -168,7 +157,7 @@ var binding = {
             viewName: viewName,
             name: directiveName,
             directiveArgs: dirArgs,
-            parent: directiveElement.parentNode,
+            parent: directiveElement.parentNode
 
         };
         this.directiveObjects.push(dirObject);
@@ -177,9 +166,7 @@ var binding = {
         var all = element.getElementsByTagName("*");
 
         if (viewName == 'template') {
-            //var allcopy = [];
-            console.log('template rendering');
-            //all = allcopy;
+            console.log(dictionaries.informations["templateRendering"]());
         }
 
 
@@ -251,19 +238,17 @@ var binding = {
             var c = context.mapObjects[k];
             if (!c.element.hasAttribute('istemplate')) {
                 var oldValueOnElement = c.oldValueOnElement;
-                var newValueOnElement = context.getMapObjectoldValueOnElement(c);
+                var newValueOnElement = context.getMapObjectOldValueOnElement(c);
                 if (oldValueOnElement != newValueOnElement) {
-                    //make magic here
                     c.mapFromElement(context);
-                    c.oldValueOnElement = context.getMapObjectoldValueOnElement(c);
+                    c.oldValueOnElement = context.getMapObjectOldValueOnElement(c);
                 }
                 //scope->element
                 var oldValueOnResource = c.oldValueOnResource;
-                var newValueOnResource = context.getMapObjectoldValueOnResource(c);
+                var newValueOnResource = context.getMapObjectOldValueOnResource(c);
                 if (oldValueOnResource != newValueOnResource) {
-                    //make magic here
                     c.mapFromResource(context);
-                    c.oldValueOnResource = context.getMapObjectoldValueOnResource(c);
+                    c.oldValueOnResource = context.getMapObjectOldValueOnResource(c);
                     c.oldValueOnElement = oldValueOnResource;
                 }
             }
@@ -272,7 +257,7 @@ var binding = {
     timerRun: function () {
         setInterval(this.timerFunction.bind(null, this), 500);
     },
-    getMapObjectoldValueOnElement: function (mo) {
+    getMapObjectOldValueOnElement: function (mo) {
         var o = null;
         if (mo.params.length > 1) {
             o = $(mo.element)[mo.method](mo.params[0]);
@@ -281,12 +266,12 @@ var binding = {
         }
         return o;
     },
-    getMapObjectoldValueOnResource: function (mo) {
+    getMapObjectOldValueOnResource: function (mo) {
         try {
             var text = mo.params[mo.params.length - 1];
             return eval("mo.scopeOwner." + text);
         } catch (e) {
-            console.log('cannot resolve');
+            throw dictionaries.errors["cannotResolveBinding"]();
         }
     },
 };

@@ -56,10 +56,7 @@ window.onhashchange = function () {
     }
 }
 $(function () {
-    /*
-     * this swallows backspace keys on any non-input element.
-     * stops backspace -> back
-     */
+    //Allows to use backpace button
     var rx = /INPUT|SELECT|TEXTAREA/i;
 
     $(document).bind("keydown keypress", function (e) {
@@ -130,7 +127,7 @@ var mgrStart = function () {
 
         $.when.apply($, viewManager.indexPromises).then(function () {
             $.when.apply($, directiveManager.getPromises).then(function () {
-                console.log("mgr.js - let's graduate!");
+                console.log(dictionaries.informations["helloText"]());
                 viewManager.getMainUrl();
                 var urlParams = null;
                 if (window.location.href.lastIndexOf('#') != -1) {
