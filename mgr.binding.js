@@ -6,35 +6,32 @@ var binding = {
     directiveObjects: [],
     repeatElements: [],
     repeatObjects: [],
-    renderElement: function (obj, mainElement, viewName) {
-        var all = [obj];
-        var element = mainElement;
-        var i = 0; //TODO REFACTOR
+    renderElement: function (renderedElement, element, viewName) {
 
-        if (all[i].attributes["mgr-events"]) {
-            var interpValues = eval(all[i].getAttribute("mgr-events"));
+        //<a mgr-events="['click scope.moveBack()']">Back</a>
+        if (renderedElement.attributes["mgr-events"]) {
+            var interpValues = eval(renderedElement.getAttribute("mgr-events"));
             for (var z = 0; z < interpValues.length; z++) {
                 var split = interpValues[z].split(' ');
                 var ind = interpValues[z].indexOf(' ');
                 var fun = interpValues[z].substring(ind);
                 fun = fun.replaceAll('scope', 'element.scope');
                 //fun.replaceAll('')
-                $(all[i]).on(split[0], function () {
+                $(renderedElement).on(split[0], function () {
                     eval(fun);
                 });
             }
         }
-
         //<div mgr-repeat="item in scope.items">
-        if (all[i].attributes["mgr-repeat"]) {
+        if (renderedElement.attributes["mgr-repeat"]) {
 
-            var interpValues = all[i].getAttribute("mgr-repeat").split(" ");
+            var interpValues = renderedElement.getAttribute("mgr-repeat").split(" ");
             var alias = interpValues[0];
             var collectionName = interpValues[2];
             var collectionData = JSON.parse(JSON.stringify(eval(collectionName.replaceAll('scope', 'element.scope'))));
-            var template = all[i];
-            var tplHtml = $(all[i]).html();
-            var parent = all[i].parentNode;
+            var template = renderedElement;
+            var tplHtml = $(renderedElement).html();
+            var parent = renderedElement.parentNode;
 
             //mark template elements to not map
             var toMark = template.getElementsByTagName("*");
@@ -59,7 +56,7 @@ var binding = {
 
             this.repeatObjects.push({
                 viewName: viewName,
-                element: obj,
+                element: renderedElement,
                 data: collectionData,
                 renderElement: element,
                 collectionName: collectionName.replaceAll('scope', 'element.scope'),
@@ -67,10 +64,10 @@ var binding = {
 
         } else
         //<div mgr="['css color scope.color', 'text scope.name']"></div>
-        if (all[i].attributes["mgr"] && !all[i].hasAttribute("istemplate")) {
-            if (jQuery.contains(document, all[i])) {
-                this.mappedElements.push(all[i]);
-                var interpKeys = eval(all[i].getAttribute("mgr"));
+        if (renderedElement.attributes["mgr"] && !renderedElement.hasAttribute("istemplate")) {
+            if (jQuery.contains(document, renderedElement)) {
+                this.mappedElements.push(renderedElement);
+                var interpKeys = eval(renderedElement.getAttribute("mgr"));
                 for (var l = 0; l < interpKeys.length; l++) {
                     var interpKey = interpKeys[l];
                     var splitArray = interpKey.split(' ');
@@ -79,7 +76,7 @@ var binding = {
                     var params = splitArray;
                     var o = {
                         viewName: viewName,
-                        element: all[i],
+                        element: renderedElement,
                         interpKey: interpKey,
                         method: method,
                         params: params,
@@ -122,10 +119,11 @@ var binding = {
             }
         } else
         //<div mgr-dir="mydir scopefieldname">
-        if (all[i].attributes["mgr-dir"]) {
-            this.renderDirective(all[i], this, mainElement, viewName);
+        if (renderedElement.attributes["mgr-dir"]) {
+            this.renderDirective(renderedElement, this, element, viewName);
         }
     },
+
     renderDirective: function (directiveElement, context, mainElement, viewName) {
         //split data from attribute
         var atr = directiveElement.getAttribute("mgr-dir");
