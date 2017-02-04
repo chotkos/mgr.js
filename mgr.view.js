@@ -1,5 +1,4 @@
 var viewManager = {
-    test: 'test',
     indexViewName: null,
     activeView: null,
     activeViewName: null,
@@ -88,7 +87,9 @@ function View(name, init, template, isIndex) {
             }
             window.location.href = href;
         }
+        $('html, body').animate({scrollTop: '0px'}, 300);
         binding.render(res, this.name);
+
     };
     this.getTemplateContent = function (templatename, viewname, context) {
         viewManager.container[viewname] = context;

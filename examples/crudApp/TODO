@@ -2,5 +2,3 @@ TODO - crudApp
 1. Rozbicie controllers.js na oddzielne pliki.
 2. Refactor HTML.
 3. Wymyśleć i zaimplementować lepszy przykład dyrektywy.
-TODO - mgr.view.js
-1. Scroll na górę strony przy zmianie widoku
