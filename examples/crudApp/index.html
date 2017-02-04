@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if (IE 9)]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]>
+<html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if (IE 9)]>
+<html class="no-js ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!-->
 <html lang="en-US">
 <!--<![endif]-->
@@ -10,19 +14,20 @@
 <head>
 
     <!-- Meta Tags -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <title>mgr.js - CRUD example</title>
 
-    <meta name="description" content="Insert Your Site Description" />
+    <meta name="description" content="Insert Your Site Description"/>
 
     <!-- Mobile Specifics -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="MobileOptimized" content="320"/>
 
     <!-- Mobile Internet Explorer ClearType Technology -->
-    <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
+    <!--[if IEMobile]>
+    <meta http-equiv="cleartype" content="on">  <![endif]-->
 
     <!-- Bootstrap -->
     <link href="_include/css/bootstrap.min.css" rel="stylesheet">
@@ -67,55 +72,60 @@
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="sticky-nav">
-            <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+<!-- Header -->
+<header>
+    <div class="sticky-nav">
+        <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
 
-            <div id="logo">
-                <p id="appname" style='background-image:none;color: #DE5E60;cursor:pointer;' mgr-events="['click scope.moveHome()']">CRUD EXAMPLE - mgr.js</p>
-            </div>
-
-            <nav id="menu">
-                <ul id="menu-nav">
-                    <li class="current"><a mgr-events="['click scope.moveHome()']">Home</a></li>
-                </ul>
-            </nav>
-
+        <div id="logo">
+            <p id="appname" style='background-image:none;color: #DE5E60;cursor:pointer;'
+               mgr-events="['click scope.moveHome()']">CRUD EXAMPLE - mgr.js</p>
         </div>
-    </header>
-    <!-- End Header -->
 
-    <div id="mgrapp"></div>
-    <!-- End Homepage Slider -->
+        <nav id="menu">
+            <ul id="menu-nav">
+                <li class="current"><a mgr-events="['click scope.moveHome()']">Home</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+<!-- End Header -->
+
+<div id="mgrapp"></div>
+<!-- End Homepage Slider -->
 
 
-    <!-- Footer -->
-    <footer>
-        <p class="credits">&copy;2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
-    </footer>
-    <!-- End Footer -->
+<!-- Footer -->
+<footer>
+    <p class="credits">&copy;2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/"
+                                              title="Brushed | Responsive One Page Template">Brushed Template</a> by <a
+            href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio
+        Atzeni</a></p>
+</footer>
+<!-- End Footer -->
 
-    <!-- Back To Top -->
-    <a id="back-to-top" href="#">
-        <i class="font-icon-arrow-simple-up"></i>
-    </a>
-    <!-- End Back to Top -->
+<!-- Back To Top -->
+<a id="back-to-top" href="#">
+    <i class="font-icon-arrow-simple-up"></i>
+</a>
+<!-- End Back to Top -->
 
-    <!--mgr.js-->
-    <script src="../../jquery-3.0.0.min.js"></script>
-    <!--
+<!--mgr.js-->
+<script src="../../jquery-3.0.0.min.js"></script>
+<!--
     <script src="../../mgr.extends.js"></script>
     <script src="../../mgr.dictionaries.js"></script>
     <script src="../../mgr.binding.js"></script>
     <script src="../../mgr.directive.js"></script>
     <script src="../../mgr.view.js"></script>
-    -->
-    <script src="../../mgr.min.js"></script>
-    <script src="fakeData.js"></script>
-    <script src="controllers.js"></script>
-    <script src="directives.js"></script>
-    <!--mgr.js-->
+     -->
+<script src="../../mgr.min.js"></script>
+
+<script src="fakeData.js"></script>
+<script src="controllers.js"></script>
+<script src="directives.js"></script>
+<!--mgr.js-->
 
 </body>
 

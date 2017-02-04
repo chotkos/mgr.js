@@ -13,6 +13,9 @@ dictionaries.errors["noBackView"] = function () {
 dictionaries.errors["cannotResolveBinding"] = function () {
     return "Cannot resolve binding.";
 };
+dictionaries.errors["cannotRenderElement"] = function () {
+    return "Failed to render element.";
+};
 
 dictionaries.informations["templateRendering"] = function(){
     return "Template rendering.";

@@ -7,22 +7,25 @@ var binding = {
     repeatElements: [],
     repeatObjects: [],
     renderElement: function (renderedElement, element, viewName) {
-
-        //<a mgr-events="['click scope.moveBack()']">Back</a>
-        if (renderedElement.attributes["mgr-events"]) {
-            this.renderEvents(renderedElement,element);
-        }
-        //<div mgr-repeat="item in scope.items">
-        if (renderedElement.attributes["mgr-repeat"]) {
-            this.renderRepeat(renderedElement, element, viewName);
-        } else
-        //<div mgr="['css color scope.color', 'text scope.name']"></div>
-        if (renderedElement.attributes["mgr"] && !renderedElement.hasAttribute("istemplate")) {
-            this.renderProperties(renderedElement, viewName, element);
-        } else
-        //<div mgr-dir="mydir scopefieldname">
-        if (renderedElement.attributes["mgr-dir"]) {
-            this.renderDirective(renderedElement, this, element, viewName);
+        if (renderedElement!=null) {
+            //<a mgr-events="['click scope.moveBack()']">Back</a>
+            if (renderedElement.attributes["mgr-events"]) {
+                this.renderEvents(renderedElement, element);
+            }
+            //<div mgr-repeat="item in scope.items">
+            if (renderedElement.attributes["mgr-repeat"]) {
+                this.renderRepeat(renderedElement, element, viewName);
+            } else
+            //<div mgr="['css color scope.color', 'text scope.name']"></div>
+            if (renderedElement.attributes["mgr"] && !renderedElement.hasAttribute("istemplate")) {
+                this.renderProperties(renderedElement, viewName, element);
+            } else
+            //<div mgr-dir="mydir scopefieldname">
+            if (renderedElement.attributes["mgr-dir"]) {
+                this.renderDirective(renderedElement, this, element, viewName);
+            }
+        }else{
+            throw dictionaries.errors["cannotRenderElement"]();
         }
     },
     renderRepeat: function (renderedElement, element, viewName) {
@@ -117,7 +120,7 @@ var binding = {
             }
         }
     },
-    renderEvents: function (renderedElement,element) {
+    renderEvents: function (renderedElement, element) {
         var interpValues = eval(renderedElement.getAttribute("mgr-events"));
         for (var z = 0; z < interpValues.length; z++) {
             var split = interpValues[z].split(' ');
@@ -125,6 +128,7 @@ var binding = {
             var fun = interpValues[z].substring(ind);
             fun = fun.replaceAll('scope', 'element.scope');
 
+            $(renderedElement).off(split[0]);
             $(renderedElement).on(split[0], function () {
                 eval(fun);
             });
@@ -169,10 +173,6 @@ var binding = {
             console.log(dictionaries.informations["templateRendering"]());
         }
 
-
-        var arr = [];
-        for (var i in all) arr[i] = all[i];
-        all = arr;
         for (var i = 0; i < all.length; i++) {
             this.renderElement(all[i], element, viewName);
         }
@@ -204,7 +204,8 @@ var binding = {
                     var toMark = template.getElementsByTagName("*");
                     for (var zi = 0; zi < toMark.length; zi++) {
                         $(toMark[zi]).attr('isTemplate', 'true');
-                    };
+                    }
+                    ;
 
                     template.hidden = true;
                     tplHtml = tplHtml.replaceAll(/istemplate="true"/g, '');
