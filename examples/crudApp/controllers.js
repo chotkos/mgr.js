@@ -74,5 +74,4 @@ var userupdate = new View("userupdate", function (scope, routeParams) {
     };
 }, "userupdate.html", false);
 
-
 mgrStart();

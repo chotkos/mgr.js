@@ -1,3 +1,10 @@
-var simpleDir = new Directive("usersCounter", function (scope, args) {
-    scope.text = "Users:" + args;
-}, "usersCounter.html");
+var backButtonDir = new Directive("backButton",function(scope,args){
+
+    scope.moveBack = function () {
+        if (viewManager.lastViewName != null) {
+            viewManager.moveBack();
+        } else {
+            viewManager.renderView('userlist', false);
+        }
+    };
+}, "backButton.html");

@@ -1,4 +1,4 @@
 TODO - crudApp
 1. Rozbicie controllers.js na oddzielne pliki.
 2. Refactor HTML.
-3. Wymyśleć i zaimplementować lepszy przykład dyrektywy.
+3. Uporządkowanie struktury folderów

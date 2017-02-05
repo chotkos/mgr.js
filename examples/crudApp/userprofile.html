@@ -18,9 +18,9 @@
         <div class="row">
             <form id="contact-form" class="contact-form" action="#">
                 <p class="contact-submit text-center">
-                    <a id="contact-submit" class="submit" mgr-events="['click scope.moveBack()']">Back</a>
-                    <a id="contact-submit" class="submit" mgr-events="['click scope.edit()']">Edit</a>
-                    <a id="contact-submit" class="submit" mgr-events="['click scope.remove()']">Remove</a>
+                    <a mgr-dir="backButton"></a>
+                    <a id="contact-edit" class="submit" mgr-events="['click scope.edit()']">Edit</a>
+                    <a id="contact-remove" class="submit" mgr-events="['click scope.remove()']">Remove</a>
                 </p>
             </form>
         </div>

@@ -144,8 +144,10 @@ var binding = {
 
         var directive = directiveManager.container[directiveName];
         //render directiveElement as the directive
-        if (argtable.length > 1) {
+        if (argtable.length > 1 && argtable[1]!="") {
             $(directiveElement).html(directive.element.replaceAll('scope', argtable[1]));
+        }else{
+            $(directiveElement).html(directive.element);
         }
 
         var all = directiveElement.getElementsByTagName("*");
