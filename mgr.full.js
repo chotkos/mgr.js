@@ -538,7 +538,4 @@ var mgrStart = function () {
         }
         load();
     } else load();
-
-
-
 };
