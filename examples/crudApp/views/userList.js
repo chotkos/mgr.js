@@ -9,4 +9,4 @@ var userlist = new View("userlist", function (scope) {
     scope.createNew = function () {
         viewManager.renderView('usercreate', false);
     };
-}, "userlist.html", true);
+}, "views/userList.html", true);

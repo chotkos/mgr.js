@@ -7,4 +7,4 @@ var backButtonDir = new Directive("backButton",function(scope,args){
             viewManager.renderView('userlist', false);
         }
     };
-}, "backButton.html");
+}, "directives/backButton.html");

@@ -13,4 +13,4 @@ var userupdate = new View("userupdate", function (scope, routeParams) {
         dataRepository.update(scope.user);
         scope.moveBack();
     };
-}, "userupdate.html", false);
+}, "views/userUpdate.html", false);

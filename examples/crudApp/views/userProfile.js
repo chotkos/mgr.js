@@ -12,4 +12,4 @@ var userprofile = new View("userprofile", function (scope, routeParams) {
         dataRepository.remove(scope.user.id);
         scope.moveBack();
     };
-}, "userprofile.html", false);
+}, "views/userProfile.html", false);

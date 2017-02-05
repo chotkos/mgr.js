@@ -20,4 +20,4 @@ var usercreate = new View("usercreate", function (scope) {
         dataRepository.create(scope.user);
         scope.moveBack();
     };
-}, "usercreate.html", false);
+}, "views/userCreate.html", false);
