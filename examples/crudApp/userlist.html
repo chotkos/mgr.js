@@ -1,7 +1,5 @@
-<!-- About Section -->
 <div id="about" class="page-alternate">
     <div class="container">
-        <!-- Title Page -->
         <div class="row">
             <div class="span12">
                 <div class="title-page">
@@ -10,12 +8,8 @@
                 </div>
             </div>
         </div>
-        <!-- End Title Page -->
-
-        <!-- People -->
         <div class="row">
             <div mgr-repeat="item in scope.users">
-                <!-- Start Profile -->
                 <div class="span4 profile" mgr-events="['click scope.showProfile(item.id)']">
                     <div class="image-wrap">
                         <div class="hover-wrap">
@@ -28,9 +22,7 @@
                     <p class="profile-description" mgr="['html item.description']"></p>
                 </div>
             </div>
-            <!-- End Profile -->
         </div>
-
     </div>
     <div class="row">
         <form id="contact-form" class="contact-form" action="#">
@@ -39,6 +31,4 @@
             </p>
         </form>
     </div>
-    <!-- End People -->
 </div>
-<!-- End About Section -->
